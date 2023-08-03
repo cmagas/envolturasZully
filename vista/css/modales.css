@@ -1,0 +1,45 @@
+.modal .modal-body .div_etiqueta{
+    margin-top: 8px;
+}
+
+.jstree-wholerow-ul {
+    margin-top: 1rem !important;
+}
+
+ul.ui-autocomplete {
+    z-index: 1100;
+    background: #FFF;
+    color:#000;
+    width: 10%;
+}
+
+.contenidoModal{
+    width: 850px;
+    margin-top: 60px;
+    height: 750px!important;
+}
+
+@media (min-width: 768px){
+    .modal-dialog {
+        width: 900px !important;
+        height: 800px !important;
+    }
+}
+
+@media (min-width: 576px){
+    .modal-dialog{
+        max-width: 900px;
+    }
+}
+
+
+.valor{
+    text-align: right;
+}
+
+.valor_texto{
+    text-transform: uppercase;
+}
+
+
+   

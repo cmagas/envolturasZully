@@ -1,0 +1,36 @@
+/*GRID CAJA*/
+table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
+    background-color: #000;
+}
+
+.transparentbar {
+    background-repeat:no-repeat;
+    cursor:pointer;
+    outline:none;
+    border:none;
+    box-shadow:none; 
+    background-image: none;  
+    background-color: transparent !important;
+  
+  }
+
+  .btn-check:focus+.btn-primary, .btn-primary:focus {
+    color: #fff;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+  
+  .transparentbar:hover {
+    color: #fff;
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+
+  .ocultoBtn{
+    display: none;
+  }
+
+  .visibleBtn{
+    display: inline-block;
+  }
