@@ -4,7 +4,7 @@ function listarControlGastos() {
         dom: 'Bfrtip', //Muestra los botones para imprimir en Buttons
         buttons: [
             {
-                text: 'Agregar Categoría',
+                text: 'Agregar Gasto',
                 className: 'addNewRecord',
                 action: function ( e, dt, node, config ){
                     abrirModuloRegistro();
