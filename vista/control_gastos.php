@@ -1,18 +1,23 @@
+<?php
+    include("conexionBD.php");
+
+?>
+
 <link href="css/tablas.css" rel="stylesheet">
 <link href="css/modales.css" rel="stylesheet">
 
-<script type="text/javascript" src="js/cat_categorias.js"></script>
+<script type="text/javascript" src="js/control_gasto.js"></script>
 
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="mt-4">CATALOGO DE CATEGORIA DE PRODUCTOS</h1>
+                <h1 class="mt-4">CONTROL DE GASTOS</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="index.php">Inicio</a></li>
-                    <li class="breadcrumb-item active">Cat. Categorias</li>
+                    <li class="breadcrumb-item active">Control Gastos</li>
                 </ol>
             </div>
         </div><!-- /.row -->
@@ -26,13 +31,14 @@
         <!--DATOS-->
         <div class="row">
             <div class="col-lg-12">
-                <table id="tbl_categorias" class="table table-striped w-100 shadow">
+                <table id="tbl_controlGastos" class="table table-striped w-100 shadow">
                     <thead>
                         <tr>
                             <th></th>
                             <th>Folio</th>
-                            <th>Nombre Categoria</th>
-                            <th>Aplica peso</th>
+                            <th>Concepto Gasto </th>
+                            <th>Fecha</th>
+                            <th>Importe</th>
                             <th>Estatus</th>
                             <th class="text-center">Opciones</th>
                         </tr>
@@ -53,19 +59,40 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-gray py-1">
-                <h5 class="modal-title">REGISTRAR CATEGORIA DE PRODUCTO</h5>
+                <h5 class="modal-title">REGISTRAR GASTO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnCerrarModal">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+
                 <div class="col-lg-12 div_etiqueta">
-                    <label for="txt_nomCategoria">
-                        <span class="small">Nombre de la Categoría</span><span class="text-danger"> *</span>
+                    <label for="cmb_tipoGasto">
+                        <span class="small">Tipo de Gasto</span><span class="text-danger"> *</span>
                     </label>
-                    <input type="text" class="form-control" id="txt_nomCategoria" placeholder="Nombre Categoría"
-                        style="text-transform:uppercase;">
+                    <select class="js-example-basic-single form-control" id="cmb_tipoGasto" style="width: 100%;">
+                        <option value="-1">Seleccione el Tipo</option>
+                        <?php
+                                $Consulta="SELECT idTipoGasto,nombreTipo FROM 4021_cat_tipoGasto WHERE situacion='1' ORDER BY nombreTipo";
+                                $con->generarOpcionesSelect($Consulta);
+                            ?>
+                    </select>
                 </div>
+
+                <div class="col-lg-6 div_etiqueta">
+                    <label for="txt_fechaGasto">
+                        <span class="small">Fecha del Gasto</span><span class="text-danger"> *</span>
+                    </label>
+                    <input type="date" class="form-control" id="txt_fechaGasto">
+                </div>
+
+                <div class="col-lg-6 div_etiqueta">
+                    <label for="txt_importe">
+                        <span class="small">Importe</span><span class="text-danger"> *</span>
+                    </label>
+                    <input type="number" class="form-control" id="txt_importe">
+                </div>
+
                 <div class="col-lg-12 div_etiqueta">
                     <label for="txt_descripcion">
                         <span class="small">Descripción</span>
@@ -73,20 +100,10 @@
                     <textarea class="form-control " rows="2" id="txt_descripcion" maxlength="150"
                         placeholder="Maximo 150 caracteres" style="text-transform:uppercase;"></textarea>
                 </div>
-                <div class="col-lg-12 div_etiqueta">
-                    <label for="txt_aplicaPeso">
-                        <span class="small">Aplica Peso</span><span class="text-danger"> *</span>
-                    </label>
-                    <select name="" id="txt_aplicaPeso" style="width: 100%;" class="form-control">
-                            <option value=" -1">Seleccionar...</option>
-                        <option value="0">No</option>
-                        <option value="1">Si</option>
-                    </select>
-                </div>
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" onclick="registrar_Categoria()">Guardar</button>
+                <button class="btn btn-primary" onclick="registrar_Gasto()">Guardar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
                     id="btnCancelarRegistro">Cancelar</button>
             </div>
@@ -99,35 +116,46 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-gray py-1">
-                <h5 class="modal-title">MODIFICAR CATEGORIA DE PRODUCTO</h5>
+                <h5 class="modal-title">MODIFICAR DATOS DE GASTO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnCerrarModal">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+
                 <div class="col-lg-12 div_etiqueta">
-                    <label for="txt_nomCategoria_modificar">
-                        <span class="small">Nombre de la Categoría</span><span class="text-danger"> *</span>
+                    <label for="cmb_tipoGasto_modificar">
+                        <span class="small">Tipo de Gasto</span><span class="text-danger"> *</span>
                     </label>
-                    <input type="text" class="form-control" id="txt_nomCategoria_modificar"
-                        placeholder="Nombre Categoría" style="text-transform:uppercase;">
+                    <select class="js-example-basic-single form-control" id="cmb_tipoGasto_modificar" style="width: 100%;">
+                        <option value="-1">Seleccione el Tipo</option>
+                        <?php
+                                $Consulta="SELECT idTipoGasto,nombreTipo FROM 4021_cat_tipoGasto WHERE situacion='1' ORDER BY nombreTipo";
+                                $con->generarOpcionesSelect($Consulta);
+                            ?>
+                    </select>
                 </div>
+
+                <div class="col-lg-6 div_etiqueta">
+                    <label for="txt_fechaGasto_modificar">
+                        <span class="small">Fecha del Gasto</span><span class="text-danger"> *</span>
+                    </label>
+                    <input type="date" class="form-control" id="txt_fechaGasto_modificar">
+                </div>
+
+                <div class="col-lg-6 div_etiqueta">
+                    <label for="txt_importe_modificar">
+                        <span class="small">Importe</span><span class="text-danger"> *</span>
+                    </label>
+                    <input type="number" class="form-control" id="txt_importe_modificar">
+                </div>
+
                 <div class="col-lg-12 div_etiqueta">
                     <label for="txt_descripcion_modificar">
                         <span class="small">Descripción</span>
                     </label>
                     <textarea class="form-control " rows="2" id="txt_descripcion_modificar" maxlength="150"
                         placeholder="Maximo 150 caracteres" style="text-transform:uppercase;"></textarea>
-                </div>
-                <div class="col-lg-12 div_etiqueta">
-                    <label for="txt_aplicaPeso_modificar">
-                        <span class="small">Aplica Peso</span><span class="text-danger"> *</span>
-                    </label>
-                    <select name="" id="txt_aplicaPeso_modificar" style="width: 100%;" class="form-control">
-                            <option value="-1">Seleccionar...</option>
-                        <option value="0">No</option>
-                        <option value="1">Si</option>
-                    </select>
                 </div>
 
                 <div class="col-lg-12 div_etiqueta">
@@ -142,12 +170,12 @@
                 </div>
 
                 <div class="col-lg-12">
-                    <input type="text" id="txtIdCategoria" hidden>
+                    <input type="text" id="txtIdGasto" hidden>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" onclick="modificar_categorias()">Guardar</button>
+                <button class="btn btn-primary" onclick="modificar_Gasto()">Guardar</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
                     id="btnCancelarRegistro">Cancelar</button>
             </div>
@@ -156,11 +184,8 @@
 </div>
 
 
-
-
-
 <script>
-$(document).ready(function() {
-    listarCategorias();
-});
+    $(document).ready(function() {
+        listarControlGastos();
+    });
 </script>

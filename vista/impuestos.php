@@ -30,7 +30,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>id</th>
+                            <th>Folio</th>
                             <th>Nombre del Impuesto</th>
                             <th>Valor (%)</th>
                             <th>Estatus</th>

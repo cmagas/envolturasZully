@@ -36,7 +36,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>id</th>
+                            <th>Folio</th>
                             <th>Empresa</th>
                             <th>Teléfono</th>
                             <th>Email</th>

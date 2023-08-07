@@ -30,7 +30,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>id</th>
+                            <th>Folio</th>
                             <th>Nombre</th>
                             <th>Estatus</th>
                             <th class="text-center">Opciones</th>

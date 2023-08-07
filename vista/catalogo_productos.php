@@ -35,6 +35,7 @@
                     <thead>
                         <tr>
                             <th></th>
+                            <th>Folio</th>
                             <th>Codigo</th>
                             <th>Producto</th>
                             <th>Categoria</th>
@@ -44,7 +45,6 @@
                             <th>Exist.</th>
                             <th>Estatus</th>
                             <th class="text-center">Opciones</th>
-
                         </tr>
                     </thead>
                     <tbody>

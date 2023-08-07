@@ -207,6 +207,23 @@ function obtenerTotalAbonosPedido($id)
     return $valor;
 }
 
+//FUNCIONES GASTOS
+function obtenerNombreGasto($id)
+{
+    global $con;
+    $valor="";
+
+    $consulta="SELECT nombreTipo FROM 4021_cat_tipoGasto WHERE idTipoGasto='".$id."'";
+    $res=$con->obtenerValor($consulta);
+
+    if($res)
+    {
+        $valor=strtoupper($res);
+    }
+
+    return $valor;
+}
+
 
 
 ?>

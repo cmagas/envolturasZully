@@ -35,7 +35,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>id</th>
+                            <th>Folio</th>
                             <th>Nombre</th>
                             <th>Empresa</th>
                             <th>Perfil</th>

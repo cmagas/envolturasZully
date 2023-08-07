@@ -32,6 +32,7 @@ function listarProductos() {
         },
         columns: [
             { data: "" },
+            { data: "id" },
             { data: "codigoProducto" },
             { data: "producto" },   
             { data: "categoria" },
@@ -64,20 +65,20 @@ function listarProductos() {
                 },
                 {
                     width: "5%",
+                    targets:1,
                     className: "text-center",
-                    targets:1
-                },
-                {
-                    width: "40%",
-                    targets:2
-                },
-                {
-                    width: "10%",
-                    className: "text-center",
-                    targets:3
                 },
                 {
                     width: "5%",
+                    className: "text-center",
+                    targets:2
+                },
+                {
+                    width: "35%",
+                    targets:3
+                },
+                {
+                    width: "10%",
                     className: "text-center",
                     targets:4
                 },
@@ -97,13 +98,18 @@ function listarProductos() {
                     targets:7
                 },
                 {
-                    width: "10%",
+                    width: "5%",
                     className: "text-center",
                     targets:8
                 },
                 {
                     width: "10%",
-                    targets:9,
+                    className: "text-center",
+                    targets:9
+                },
+                {
+                    width: "10%",
+                    targets:10,
                     orderable: false,
                     render: function(data,type,meta){
                         return "<center>"+

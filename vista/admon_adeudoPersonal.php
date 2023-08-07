@@ -30,7 +30,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>id</th>
+                            <th>Folio</th>
                             <th>Nombre Personal</th>
                             <th>Fecha Entrega</th>
                             <th>Importe</th>

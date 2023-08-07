@@ -36,7 +36,7 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>id</th>
+                            <th>Folio</th>
                             <th>Nombre</th>
                             <th>Localidad</th>
                             <th>Estado</th>
