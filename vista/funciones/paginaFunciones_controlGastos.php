@@ -86,7 +86,6 @@
         $fechaGasto=$obj->fechaGasto;
         $importe=$obj->importe;
         $descripcion=$obj->descripcion;
-       
  
          $tipoOperacion="Registrar nuevo Gasto: ".$idTipoGasto;
 
