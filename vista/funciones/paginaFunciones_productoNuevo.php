@@ -9,6 +9,7 @@
         global $con;
         $idUsuarioSesion=$_SESSION['idUsr'];
         $cod_unidad=$_SESSION['cod_unidad'];
+        $codigoBarra="";
 
         $fechaAct=date("Y-m-d");
 
@@ -16,9 +17,11 @@
         $ruta="";
 
         $nombreProducto=$_POST['txt_nombre'];
-        $codigoBarra=$_POST['txt_codigoBarra'];
+        //$codigoBarra=$_POST['txt_codigoBarra'];
         $idImpuesto=$_POST['txt_impuesto'];
         $idCategoria=$_POST['txt_categoria'];
+        $idTipoProducto=$_POST['cmb_tipo'];
+        $idSubTipoProducto=$_POST['cmb_subTipo'];
         $precioCompra=$_POST['txt_precioCompra'];
         $precioMayoreo=$_POST['txt_precioMayoreo'];
         $precioMenudeo=$_POST['txt_precioMenudeo'];
@@ -28,10 +31,16 @@
         $precioProduccion=$_POST['txt_precioProducccion'];
         $nombreFoto=$_FILES['iptImagen']['name'];
 
+       
+
         $tipoOperacion="Registrar nuevo Producto: ".$nombreProducto;
 
-        if($nombreProducto!="" && $codigoBarra!="" && $idImpuesto!="-1" && $idCategoria!="-1" && $precioCompra!="" && $precioMayoreo!="" && $precioMenudeo!="" && $stockMaximo!="" && $stockMinimo!="")
+        if($nombreProducto!="" && $idImpuesto!="-1" && $idCategoria!="-1" && $idTipoProducto!="-1" && $idSubTipoProducto!="-1" && $precioCompra!="" && $precioMayoreo!="" && $precioMenudeo!="" && $stockMaximo!="" && $stockMinimo!="")
         { 
+            $nomTipoProductoA=obtenerTipoProducto($idTipoProducto,'1');
+            $nomSubTipoProductoA=obtenerTipoProducto($idSubTipoProducto,'2');
+
+            $codigoBarra=$nomTipoProductoA."-".$nomSubTipoProductoA;
 
                 $dir="fotos/productos/";
 
@@ -66,9 +75,10 @@
         
                 $consulta[$x]="INSERT INTO 3001_cat_productos(idResponsable,fechaCreacion,cod_unidad,codigo_producto,idCategoria,
                         idImpuesto,descripcion_producto,precioCompra,precioMenudeo,precioMayoreo,utilidad,stockMaximo,stockMinimo,
-                        imagen_producto,precioProduccion,situacion)VALUES('".$idUsuarioSesion."','".$fechaAct."','".$cod_unidad."',
+                        imagen_producto,precioProduccion,idTipo,idSubTipo,situacion)VALUES('".$idUsuarioSesion."','".$fechaAct."','".$cod_unidad."',
                         '".$codigoBarra."','".$idCategoria."','".$idImpuesto."','".$nombreProducto."','".$precioCompra."','".$precioMenudeo."',
-                        '".$precioMayoreo."','".$utilidad."','".$stockMaximo."','".$stockMinimo."','".$ruta."','".$precioProduccion."','1')";
+                        '".$precioMayoreo."','".$utilidad."','".$stockMaximo."','".$stockMinimo."','".$ruta."','".$precioProduccion."',
+                        '".$idTipoProducto."','".$idSubTipoProducto."','1')";
                 $x++;
         
                 $consulta[$x]="commit";
@@ -100,6 +110,28 @@
     function obtenerExtensionFichero($str)
     {
         return end(explode(".", $str));
+    }
+
+    function obtenerTipoProducto($id,$tipo)
+    {
+        global $con;
+        $valor="";
+
+        switch($tipo)
+        {
+            case 1: //tipoProducto
+                    $consulta="SELECT nombre_tipo FROM 3002_cat_tipoProducto WHERE idTipoProducto='".$id."'";
+            break;
+            case 2: //SubTipo
+                    $consulta="SELECT nombre_subTipo FROM 3003_cat_subTipoProducto WHERE idSubTipoProducto='".$id."'";
+            break;
+        }
+
+        $res=$con->obtenerValor($consulta);
+        $valor=strtoupper($res);
+
+        return $valor;
+
     }
 
         

@@ -36,7 +36,7 @@
                         <tr>
                             <th></th>
                             <th>Folio</th>
-                            <th>Codigo</th>
+                            <th>Clave</th>
                             <th>Producto</th>
                             <th>Categoria</th>
                             <th>Precio Men.</th>
@@ -106,22 +106,22 @@
                                 </div>
 
                                 <!--Columna Codigo Barra-->
-                                <div class="col-lg-6 div_etiqueta">
+                                <div class="col-lg-4 div_etiqueta">
                                     <label for="txt_codigoBarra">
-                                        <span class="small">Codigo de Barra</span><span class="text-danger"> *</span>
+                                        <span class="small">Clave</span>
                                     </label>
                                     <input type="text" class="form-control" id="txt_codigoBarra" name="txt_codigoBarra"
-                                        placeholder="Código del Producto">
+                                        placeholder="Clave del Producto" readonly>
                                 </div>
 
                                 <!--Columna Impuesto-->
-                                <div class="col-lg-6 div_etiqueta">
+                                <div class="col-lg-4 div_etiqueta">
                                     <label for="txt_impuesto">
                                         <span class="small">Impuesto</span><span class="text-danger"> *</span>
                                     </label>
                                     <select name="txt_impuesto" id="txt_impuesto" style="width: 100%;"
                                         class="form-control">
-                                        <option value="-1">Seleccione el impuesto</option>
+                                        <option value="-1">impuesto</option>
                                         <?php
                                             $Consulta="SELECT idImpuesto, CONCAT(nombreImpuesto,'[ ',valor,' ]') AS impuesto FROM 4002_impuesto WHERE situacion='1'";
                                             $con->generarOpcionesSelect($Consulta);
@@ -130,15 +130,44 @@
                                 </div>
 
                                 <!--Columna Categoria-->
-                                <div class="col-lg-6 div_etiqueta">
+                                <div class="col-lg-4 div_etiqueta">
                                     <label for="txt_categoria">
                                         <span class="small">Categoría</span><span class="text-danger"> *</span>
                                     </label>
                                     <select name="txt_categoria" id="txt_categoria" style="width: 100%;"
                                         class="form-control">
-                                        <option value="-1">Seleccione la Categoría</option>
+                                        <option value="-1">Categoría</option>
                                         <?php
                                             $Consulta="SELECT id_categoria,nombre_categoria FROM 4001_categorias WHERE situacion='1' ORDER BY nombre_categoria";
+                                            $con->generarOpcionesSelect($Consulta);
+                                        ?>
+                                    </select>
+                                </div>
+
+                                <!--Columna TIPO-->
+                                <div class="col-lg-4 div_etiqueta">
+                                    <label for="cmb_tipo">
+                                        <span class="small">Tipo</span><span class="text-danger"> *</span>
+                                    </label>
+                                    <select name="cmb_tipo" id="cmb_tipo" style="width: 100%;" class="form-control">
+                                        <option value="-1">Tipo</option>
+                                        <?php
+                                            $Consulta="SELECT idTipoProducto,nombre_tipo FROM 3002_cat_tipoProducto WHERE situacion='1' ORDER BY idTipoProducto";
+                                            $con->generarOpcionesSelect($Consulta);
+                                        ?>
+                                    </select>
+                                </div>
+
+                                <!--Columna SUB TIPO-->
+                                <div class="col-lg-4 div_etiqueta">
+                                    <label for="cmb_subTipo">
+                                        <span class="small">Sub Tipo</span><span class="text-danger"> *</span>
+                                    </label>
+                                    <select name="cmb_subTipo" id="cmb_subTipo" style="width: 100%;"
+                                        class="form-control">
+                                        <option value="-1">Sub Tipo</option>
+                                        <?php
+                                            $Consulta="SELECT idSubTipoProducto,nombre_subTipo FROM 3003_cat_subTipoProducto WHERE situacion='1' ORDER BY idSubTipoProducto";
                                             $con->generarOpcionesSelect($Consulta);
                                         ?>
                                     </select>
@@ -164,16 +193,16 @@
                             <label for="txt_precioMayoreo">
                                 <span class="small">Precio de Mayoreo</span><span class="text-danger"> *</span>
                             </label>
-                            <input type="number" class="form-control valor" id="txt_precioMayoreo" name="txt_precioMayoreo"
-                                value="0">
+                            <input type="number" class="form-control valor" id="txt_precioMayoreo"
+                                name="txt_precioMayoreo" value="0">
                         </div>
 
                         <div class="col-lg-4 div_etiqueta mt-3">
                             <label for="txt_precioMenudeo">
                                 <span class="small">Precio de Menudeo</span><span class="text-danger"> *</span>
                             </label>
-                            <input type="number" class="form-control valor" id="txt_precioMenudeo" name="txt_precioMenudeo"
-                                value="0">
+                            <input type="number" class="form-control valor" id="txt_precioMenudeo"
+                                name="txt_precioMenudeo" value="0">
                         </div>
 
                         <div class="col-lg-4 div_etiqueta">
@@ -204,8 +233,8 @@
                             <label for="txt_precioProducccion">
                                 <span class="small">Precio producción</span><span class="text-danger"> *</span>
                             </label>
-                            <input type="number" class="form-control valor" id="txt_precioProducccion" name="txt_precioProducccion"
-                                value="0">
+                            <input type="number" class="form-control valor" id="txt_precioProducccion"
+                                name="txt_precioProducccion" value="0">
                         </div>
 
                     </div>
@@ -248,10 +277,10 @@
                         <!--Columna Codigo Barra-->
                         <div class="col-lg-4 div_etiqueta">
                             <label for="txt_codigoBarra_modificar">
-                                <span class="small">Codigo de Barra</span><span class="text-danger"> *</span>
+                                <span class="small">Codigo de Barra</span>
                             </label>
                             <input type="text" class="form-control" id="txt_codigoBarra_modificar"
-                                name="txt_codigoBarra_modificar" placeholder="Código del Producto">
+                                name="txt_codigoBarra_modificar" placeholder="Código del Producto" readonly>
                         </div>
 
                         <!--Columna Impuesto-->
@@ -285,6 +314,34 @@
                         </div>
 
                         <div class="col-lg-4 div_etiqueta">
+                            <label for="cmb_tipo_modificar">
+                                <span class="small">Tipo</span><span class="text-danger"> *</span>
+                            </label>
+                            <select name="cmb_tipo_modificar" id="cmb_tipo_modificar" style="width: 100%;"
+                                class="form-control">
+                                <option value="-1">Tipo</option>
+                                <?php
+                                    $Consulta="SELECT idTipoProducto,nombre_tipo FROM 3002_cat_tipoProducto WHERE situacion='1' ORDER BY idTipoProducto";
+                                    $con->generarOpcionesSelect($Consulta);
+                                ?>
+                            </select>
+                        </div>
+
+                        <!--Columna SUB TIPO-->
+                        <div class="col-lg-4 div_etiqueta">
+                            <label for="cmb_subTipo_modificar">
+                                <span class="small">Sub Tipo</span><span class="text-danger"> *</span>
+                            </label>
+                            <select name="cmb_subTipo_modificar" id="cmb_subTipo_modificar" style="width: 100%;" class="form-control">
+                                <option value="-1">Sub Tipo</option>
+                                <?php
+                                    $Consulta="SELECT idSubTipoProducto,nombre_subTipo FROM 3003_cat_subTipoProducto WHERE situacion='1' ORDER BY idSubTipoProducto";
+                                    $con->generarOpcionesSelect($Consulta);
+                                ?>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-4 div_etiqueta">
                             <label for="txt_precioCompra_modificar">
                                 <span class="small">Precio de Compra</span><span class="text-danger"> *</span>
                             </label>
@@ -296,48 +353,48 @@
                             <label for="txt_precioMayoreo_modificar">
                                 <span class="small">Precio Mayoreo</span><span class="text-danger"> *</span>
                             </label>
-                            <input type="number" class="form-control valor" id="txt_precioMayoreo_modificar" name="txt_precioMayoreo_modificar"
-                                value="0">
+                            <input type="number" class="form-control valor" id="txt_precioMayoreo_modificar"
+                                name="txt_precioMayoreo_modificar" value="0">
                         </div>
 
                         <div class="col-lg-4 div_etiqueta">
                             <label for="txt_precioMenudeo_modificar">
                                 <span class="small">Precio Menudeo</span><span class="text-danger"> *</span>
                             </label>
-                            <input type="number" class="form-control valor" id="txt_precioMenudeo_modificar" name="txt_precioMenudeo_modificar"
-                                value="0">
+                            <input type="number" class="form-control valor" id="txt_precioMenudeo_modificar"
+                                name="txt_precioMenudeo_modificar" value="0">
                         </div>
 
                         <div class="col-lg-4 div_etiqueta">
                             <label for="txt_utilidad_modificar">
                                 <span class="small">Utilidad</span>
                             </label>
-                            <input type="text" class="form-control valor" id="txt_utilidad_modificar" name="txt_utilidad_modificar"
-                                value="0" readonly>
+                            <input type="text" class="form-control valor" id="txt_utilidad_modificar"
+                                name="txt_utilidad_modificar" value="0" readonly>
                         </div>
 
                         <div class="col-lg-4 div_etiqueta">
                             <label for="txt_stockMaximo_modificar">
                                 <span class="small">Stock Máximo</span><span class="text-danger"> *</span>
                             </label>
-                            <input type="number" class="form-control valor" id="txt_stockMaximo_modificar" name="txt_stockMaximo_modificar"
-                                value="0">
+                            <input type="number" class="form-control valor" id="txt_stockMaximo_modificar"
+                                name="txt_stockMaximo_modificar" value="0">
                         </div>
 
                         <div class="col-lg-4 div_etiqueta">
                             <label for="txt_stockMinimo_modificar">
                                 <span class="small">Stock Mínimo</span><span class="text-danger"> *</span>
                             </label>
-                            <input type="number" class="form-control valor" id="txt_stockMinimo_modificar" name="txt_stockMinimo_modificar"
-                                value="0">
+                            <input type="number" class="form-control valor" id="txt_stockMinimo_modificar"
+                                name="txt_stockMinimo_modificar" value="0">
                         </div>
 
                         <div class="col-lg-4 div_etiqueta">
                             <label for="txt_precioProduccion_modificar">
                                 <span class="small">Precio producción</span><span class="text-danger"> *</span>
                             </label>
-                            <input type="number" class="form-control valor" id="txt_precioProduccion_modificar" name="txt_precioProduccion_modificar"
-                                value="0">
+                            <input type="number" class="form-control valor" id="txt_precioProduccion_modificar"
+                                name="txt_precioProduccion_modificar" value="0">
                         </div>
 
                         <div class="col-lg-12 div_etiqueta">

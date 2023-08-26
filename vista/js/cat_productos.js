@@ -152,6 +152,8 @@ $("#tbl_productos").on("click", ".btEditarProducto", function () {
      $("#txt_codigoBarra_modificar").val(data.codigoProducto);
      $("#txt_impuesto_modificar").val(data.idImpuesto);
      $("#txt_categoria_modificar").val(data.idCategoria);
+     $("#cmb_tipo_modificar").val(data.idTipo);
+     $("#cmb_subTipo_modificar").val(data.idSubTipo);
      $("#txt_precioCompra_modificar").val(precioCompra);
      $("#txt_precioMayoreo_modificar").val(precioMayoreo);
      $("#txt_precioMenudeo_modificar").val(precioMenudeo);
@@ -230,7 +232,9 @@ function modificar_producto()
     var nombreProducto = $("#txt_nombre_modificar").val();
     var codigoProducto = $("#txt_codigoBarra_modificar").val();
     var impuesto = $("#txt_impuesto_modificar").val();
-    var categoria = $("#txt_categoria_modificar").val();
+    //var categoria = $("#txt_categoria_modificar").val();
+    var idTipo = $("#cmb_tipo_modificar").val();
+    var idSubTipo = $("#cmb_subTipo_modificar").val();
     var precioCompra = $("#txt_precioCompra_modificar").val();
     var precioMayoreo = $("#txt_precioMayoreo_modificar").val();
     var precioMenudeo = $("#txt_precioMenudeo_modificar").val();
@@ -243,15 +247,17 @@ function modificar_producto()
 
     var situacion = $("#txt_Situacion").val();
 
-    if(nombreProducto.lenght==0 || codigoProducto.lenght==0 || impuesto==-1 || categoria==-1 || precioCompra.lenght==0 || precioMayoreo.lenght==0 || precioMenudeo.lenght==0 ||stockMaximo.lenght==0 || stockMinimo.lenght==0 || precioProduccion.lenght==0 || situacion==-1)
+    if(nombreProducto.lenght==0 || impuesto==-1 || categoria==-1 || idTipo==-1 || idSubTipo==-1 ||
+        precioCompra.lenght==0 || precioMayoreo.lenght==0 || precioMenudeo.lenght==0 ||stockMaximo.lenght==0 || 
+        stockMinimo.lenght==0 || precioProduccion.lenght==0 || situacion==-1)
     {
         return Swal.fire("Mensaje De Advertencia","Los campos marcados con * son obligatorios","warning");
     }
 
     var cadObj='{"idProducto":"'+idProducto+'","nombreProducto":"'+nombreProducto+'","codigoProducto":"'+codigoProducto+'","impuesto":"'+impuesto
-        +'","categoria":"'+categoria+'","precioCompra":"'+precioCompra+'","precioMayoreo":"'+precioMayoreo+'","precioMenudeo":"'+precioMenudeo
-        +'","utilidad":"'+utilidad+'","stockMaximo":"'+stockMaximo+'","stockMinimo":"'+stockMinimo+'","precioProduccion":"'+precioProduccion
-        +'","situacion":"'+situacion+'"}';
+        +'","idTipo":"'+idTipo+'","idSubTipo":"'+idSubTipo+'","precioCompra":"'+precioCompra+'","precioMayoreo":"'+precioMayoreo
+        +'","precioMenudeo":"'+precioMenudeo+'","utilidad":"'+utilidad+'","stockMaximo":"'+stockMaximo+'","stockMinimo":"'+stockMinimo
+        +'","precioProduccion":"'+precioProduccion+'","situacion":"'+situacion+'"}';
     
     function funcAjax()
     {
@@ -353,6 +359,8 @@ function limpiarCamposModalRegistro()
     $("#txt_codigoBarra").val('');
     $("#txt_impuesto").val('-1');
     $("#txt_categoria").val('-1');
+    $("#cmb_tipo").val('-1');
+    $("#cmb_subTipo").val('-1');
     $("#txt_precioCompra").val('0');
     $("#txt_precioMayoreo").val('0');
     $("#txt_precioMenudeo").val('0');

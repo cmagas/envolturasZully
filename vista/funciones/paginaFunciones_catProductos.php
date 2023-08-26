@@ -47,7 +47,7 @@
                 "categoria":"'.$nomCategoria.'","idImpuesto":"'.$fila[6].'","producto":"'.$fila[7].'","precioCompra":"'.$precioCompra.'",
                 "precioMenudeo":"'.$precioMenudeo.'","utilidad":"'.$fila[11].'","stockMax":"'.$fila[12].'","stockMin":"'.$fila[13].'",
                 "stock_producto":"'.$exist.'","fechaCreacion":"'.$fila[2].'","precioMayoreo":"'.$precioMayoreo.'","fotoProducto":"'.$fila[14].'",
-                "precioProduccion":"'.$precioProduccion.'","existencia":"'.$exist.'","situacion":"'.$fila[16].'"}';
+                "precioProduccion":"'.$precioProduccion.'","existencia":"'.$exist.'","idTipo":"'.$fila[16].'","idSubTipo":"'.$fila[17].'","situacion":"'.$fila[18].'"}';
 			
 			if($arrRegistro=="")
 				$arrRegistro=$o;
@@ -75,9 +75,11 @@
     
         $idProducto=$obj->idProducto;
         $producto=$obj->nombreProducto;
-        $codigoProducto=$obj->codigoProducto;
+        //$codigoProducto=$obj->codigoProducto;
         $idImpuesto=$obj->impuesto;
         $idCategoria=$obj->categoria;
+        $idTipoProducto=$obj->idTipo;
+        $idSubTipoProducto=$obj->idSubTipo;
         $precioCompra=$obj->precioCompra;
         $precioMayoreo=$obj->precioMayoreo;
         $precioMenudeo=$obj->precioMenudeo;
@@ -86,6 +88,11 @@
         $stockMinimo=$obj->stockMinimo;
         $precioProduccion=$obj->precioProduccion;
         $situacion=$obj->situacion;
+
+        $nomTipoProductoA=obtenerTipoProducto($idTipoProducto,'1');
+        $nomSubTipoProductoA=obtenerTipoProducto($idSubTipoProducto,'2');
+
+        $codigoProducto=$nomTipoProductoA."-".$nomSubTipoProductoA;
  
          $tipoOperacion="Realiza cambios a Producto: ".$idProducto;
 
@@ -96,7 +103,7 @@
         $consulta[$x]="UPDATE 3001_cat_productos SET codigo_producto='".$codigoProducto."',idCategoria='".$idCategoria."',idImpuesto='".$idImpuesto."',
         descripcion_producto='".$producto."',precioCompra='".$precioCompra."',precioMenudeo='".$precioMenudeo."',precioMayoreo='".$precioMayoreo."',
         utilidad='".$utilidad."',stockMaximo='".$stockMaximo."',stockMinimo='".$stockMinimo."',precioProduccion='".$precioProduccion."',
-        situacion='".$situacion."' WHERE idProducto='".$idProducto."'";
+        idTipo='".$idProducto."',idSubTipo='".$idSubTipoProducto."',situacion='".$situacion."' WHERE idProducto='".$idProducto."'";
         $x++;
 
         $consulta[$x]="commit";
@@ -112,6 +119,28 @@
     function formatearMoneda($monto)
     {
         return '$ '.number_format($monto,2);
+    }
+
+    function obtenerTipoProducto($id,$tipo)
+    {
+        global $con;
+        $valor="";
+
+        switch($tipo)
+        {
+            case 1: //tipoProducto
+                    $consulta="SELECT nombre_tipo FROM 3002_cat_tipoProducto WHERE idTipoProducto='".$id."'";
+            break;
+            case 2: //SubTipo
+                    $consulta="SELECT nombre_subTipo FROM 3003_cat_subTipoProducto WHERE idSubTipoProducto='".$id."'";
+            break;
+        }
+
+        $res=$con->obtenerValor($consulta);
+        $valor=strtoupper($res);
+
+        return $valor;
+
     }
 
 ?>    
