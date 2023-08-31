@@ -288,7 +288,7 @@ function agregarProductoTable()
                     }).draw();
                     limpiarProductos()
                 }
-                //recalcularTotales();
+                recalcularTotales();
 
             }else{
                 return Swal.fire(" El producto no existe ","error");
@@ -414,6 +414,24 @@ function registrar_pedidos()
 
     $("#iptCodigoVenta").focus();
 
+
+}
+
+function recalcularTotales()
+{
+    var totalPedido = 0.00;
+
+    table.rows().eq(0).each(function(index){
+
+        var row = table.row(index);
+        var data = row.data();
+
+        totalPedido = parseFloat(totalPedido) + parseFloat(data['totalProd'].replace("$ ", ""));
+
+    });
+
+    $("#totalPedidos").html("");
+    $("#totalPedidos").html(totalPedido.toFixed(2));
 
 }
 

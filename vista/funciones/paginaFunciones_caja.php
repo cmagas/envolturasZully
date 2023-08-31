@@ -40,6 +40,9 @@
         case 9:
                 obtenerCotizacionPeriodo();
         break;
+        case 10:
+                obtenerListadoClientes();
+        break;
     }
 
     function obtenerListadoProductos()
@@ -243,6 +246,12 @@
         $total_venta=$obj->total_venta;
         $subTotal = $obj->subtotal;
         $ivaTotal = $obj->ivaTotal;
+        $idClienteComp = $obj->idCliente;
+        $idTipoPago = $obj->idTipoPago; 
+
+        $valorCliente=explode("~",$idClienteComp);
+        $idCliente=$valorCliente[0];
+
         $descripcion="Venta realizada con Nro Boleta: ".$nro_boleta;
 
         //$numeroFolioNuevo=obtenerFolioBoletaNuevo($nro_boleta);
@@ -252,8 +261,8 @@
         $x++;
 
         $consulta[$x]="INSERT INTO 4004_venta_cabecera(idResponsable,cod_unidad,fecha_venta,nro_boleta,descripcion,subtotal,iva,total_venta,formaPago,
-                totalFfectivo,totalTarjeta,numTarjeta)VALUES('".$idUsuario."','".$cod_unidad."','".$fechaActual."','".$nro_boleta."','".$descripcion."',
-                '".$subTotal."','".$ivaTotal."','".$total_venta."','1','0','0','0')";
+                totalFfectivo,totalTarjeta,numTarjeta,idCliente)VALUES('".$idUsuario."','".$cod_unidad."','".$fechaActual."','".$nro_boleta."','".$descripcion."',
+                '".$subTotal."','".$ivaTotal."','".$total_venta."','".$idTipoPago."','0','0','0','".$idCliente."')";
         $x++;
 
         $consulta[$x]="set @idRegistro:=(select last_insert_id())";
@@ -388,6 +397,7 @@
         $consulta="SELECT id_boleta,nro_boleta,fecha_venta,total_venta FROM 4004_venta_cabecera 
             WHERE fecha_venta BETWEEN '".$fechaDesde."' AND '".$fechaHasta."' AND situacion='1'
             AND cod_unidad='".$cod_unidad."' ORDER BY fecha_venta,id_boleta";
+
         $resp=$con->obtenerFilas($consulta);
 
         while($fila=mysql_fetch_row($resp))
@@ -490,6 +500,30 @@
            
         }
         echo '{"data":['.$ventas.']}';
+    }
+
+    function obtenerListadoClientes()
+    {
+        global $con;
+
+        $arrRegistro="";
+
+        $consulta="SELECT CONCAT(idCliente,'~',nombre) AS Clientes  FROM 4018_clientes WHERE situacion='1' ORDER BY nombre
+        ";
+        $res=$con->obtenerFilas($consulta);
+
+        while($fila=mysql_fetch_row($res))
+        {
+            $cadena=$fila[0];
+            $o='{"descripcion_cliente":"'.$cadena.'"}';
+
+            if($arrRegistro=="")
+                $arrRegistro=$o;
+            else
+                $arrRegistro.=",".$o;
+        }
+
+        echo '['.$arrRegistro.']';
     }
     
 

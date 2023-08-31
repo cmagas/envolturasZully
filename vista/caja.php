@@ -37,6 +37,21 @@
 
             <div class="col-md-9">
                 <div class="row">
+
+                    <!-- INPUT PARA INGRESO DEL CODIGO DE CLIENTE -->
+                    <div class="col-md-12 mb-2">
+                        <div class="form-group mb-2">
+
+                            <label class="col-form-label" for="iptCodigoCliente">
+                                <i class="fas fa-user fs-6"></i>
+                                <span class="small">Cliente</span>
+                            </label>
+
+                            <input type="text" class="form-control form-control-sm" id="iptCodigoCliente"
+                                name="iptCodigoCliente" placeholder="Ingrese el nombre del Cliente">
+                        </div>
+                    </div>
+
                     <!-- INPUT PARA INGRESO DEL CODIGO DE BARRAS O DESCRIPCION DEL PRODUCTO -->
                     <div class="col-md-12 mb-2">
                         <div class="form-group mb-2">
@@ -56,7 +71,6 @@
                     <div class="col-md-6 mb-3">
                         <h3>Total Venta: $ <span id="totalVenta">0.00</span></h3>
                     </div>
-
 
                     <!-- BOTONES PARA VACIAR LISTADO Y COMPLETAR LA VENTA -->
                     <div class="col-md-6 text-right">
@@ -102,6 +116,7 @@
                     <h5 class="card-header bg-primary text-white text-center m-0">
                         Total Venta: $ <span id="totalVentaRegistrar">0.00</span>
                     </h5>
+
                     <div class="card-body p-2 m-3">
 
                         <!-- SELECCIONAR TIPO DE DOCUMENTO -->
@@ -133,7 +148,7 @@
                             </label>
 
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-                                id="selTipoPago" disabled>
+                                id="selTipoPago">
                                 <option value="0">Seleccione Tipo Pago</option>
                                 <option value="1" selected="true">Efectivo</option>
                                 <option value="2">Tarjeta</option>
@@ -143,6 +158,23 @@
                             <span id="validate_categoria" class="text-danger small fst-italic" style="display:none">
                                 Debe Ingresar tipo de pago
                             </span>
+                        </div>
+
+                        <!-- SELECCIONAR TIPO DE VENTA -->
+                        <div class="form-group mb-2">
+
+                            <label class="col-form-label" for="selCategoriaReg">
+                                <i class="fas fa-money-bill-alt fs-6"></i>
+                                <span class="small">Tipo Venta </span><span class="text-danger">*</span>
+                            </label>
+
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                                id="selTipoVenta">
+                                <option value="0">Seleccione Tipo Venta</option>
+                                <option value="1" selected="true">Contado</option>
+                                <option value="2">Credito</option>
+                            </select>
+                            
                         </div>
 
                         <!-- SERIE Y NRO DE BOLETA -->
@@ -245,6 +277,8 @@ $(document).ready(function() {
         TRAER LISTADO DE PRODUCTOS PARA INPUT DE AUTOCOMPLETADO
     ======================================================================================*/
     listadoProducto();
+
+    listadoClientes();
 
 
 

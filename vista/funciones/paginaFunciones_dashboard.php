@@ -47,7 +47,7 @@
 
         /*SE OBTIENE TOTAL VENTA DEL MES */
         $consultaTV="SELECT SUM(total_venta) FROM 4004_venta_cabecera WHERE cod_unidad='".$cod_unidad."' AND YEAR(fecha_venta)='".$anio."' 
-                    AND MONTH(total_venta)='".$mes."'";
+                    AND MONTH(fecha_venta)='".$mes."'";
         $resTV=$con->obtenerValor($consultaTV);
 
         if($resTV)
@@ -77,7 +77,20 @@
             $totalAdeudos=cambiarFormatoMoneda($resAdeudo-$resAbonos);
          }
 
-         $o='{"totalVentaMes":"'.$totalVentaMes.'","totalVentaDia":"'.$totalVentaDia.'","totalAdeudos":"'.$totalAdeudos.'"}';
+         /*SE OBTIENE EL TOTAL DE GASTOS DEL MES*/
+
+         $consultaPagosPersonalMes="SELECT SUM(importe) FROM 4017_abonosPedidosPersonal WHERE cod_unidad='".$cod_unidad."' 
+         AND YEAR(fechaPago)='".$anio."' AND MONTH(fechaPago)='".$mes."'";
+         $resPersonal=$con->obtenerValor($consultaPagosPersonalMes);
+
+         $consultarGastosMes="SELECT SUM(importe) FROM 4022_control_Gastos WHERE cod_unidad='".$cod_unidad."' 
+         AND YEAR(fechaGasto)='".$anio."' AND MONTH(fechaGasto)='".$mes."'";
+         $resTotalGastos=$con->obtenerValor($consultarGastosMes);
+
+         $importeTotalGastoMes=cambiarFormatoMoneda($resPersonal+$resTotalGastos);
+
+
+         $o='{"totalVentaMes":"'.$totalVentaMes.'","totalVentaDia":"'.$totalVentaDia.'","totalAdeudos":"'.$totalAdeudos.'","importeTotalGastoMes":"'. $importeTotalGastoMes.'"}';
 
          echo $o;
 

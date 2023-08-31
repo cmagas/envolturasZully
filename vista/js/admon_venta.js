@@ -17,7 +17,7 @@ function inicializarTablaVentas()
         "columnDefs": [
             { visible: false, targets: [groupColumn,0] },
             {
-                targets: [2,3,4,5,6,7],
+                targets: [1,2,3,4,5,6,7],
                 orderable: false
             }
         ],
@@ -58,8 +58,6 @@ function inicializarTablaVentas()
             var api = this.api();
             var rows = api.rows( {page:'current'} ).nodes();
             var last=null;
-
-           
 
             api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {                
                  //console.log("🚀 ~ file: administrar_ventas.php ~ line 61 ~ group : ", group)               

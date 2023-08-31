@@ -103,7 +103,7 @@
         $consulta[$x]="UPDATE 3001_cat_productos SET codigo_producto='".$codigoProducto."',idCategoria='".$idCategoria."',idImpuesto='".$idImpuesto."',
         descripcion_producto='".$producto."',precioCompra='".$precioCompra."',precioMenudeo='".$precioMenudeo."',precioMayoreo='".$precioMayoreo."',
         utilidad='".$utilidad."',stockMaximo='".$stockMaximo."',stockMinimo='".$stockMinimo."',precioProduccion='".$precioProduccion."',
-        idTipo='".$idProducto."',idSubTipo='".$idSubTipoProducto."',situacion='".$situacion."' WHERE idProducto='".$idProducto."'";
+        idTipo='".$idTipoProducto."',idSubTipo='".$idSubTipoProducto."',situacion='".$situacion."' WHERE idProducto='".$idProducto."'";
         $x++;
 
         $consulta[$x]="commit";

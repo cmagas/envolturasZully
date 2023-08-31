@@ -73,6 +73,7 @@
 
                 <div class="row">
 
+                    <!--SELECCION DEL PERSONAL-->
                     <div class="col-lg-9 div_etiqueta">
                         <label for="cmb_Personal">
                             <span class="small">Nombre del Personal</span><span class="text-danger"> *</span>
@@ -97,6 +98,8 @@
                 </div>
 
                 <div class="row mt-3">
+
+                    <!--SELECCION DE PRODUCTO-->
                     <div class="col-md-9 ">
                         <div class="form-group mb-2">
                             <label class="col-form-label" for="iptCodigoVenta">
@@ -107,6 +110,8 @@
                                 placeholder="Ingrese el código o el nombre del producto">
                         </div>
                     </div>
+
+                    <!--INGRESAR CANTIDAD-->
                     <div class="col-md-3">
                         <div class="form-group mb-2">
                             <label class="col-form-label" for="iptCantidad">
@@ -116,11 +121,17 @@
                                 placeholder="Ingrese la Cantidad">
                         </div>
                     </div>
+
                 </div>
 
                 <div class="row  mt-5">
+                    <!-- ETIQUETA QUE MUESTRA LA SUMA TOTAL DE LOS PRODUCTOS AGREGADOS AL LISTADO -->
+                    <div class="col-md-6">
+                        <h4>Total Pedido: $ <span id="totalPedidos">0.00</span></h4>
+                    </div>
+
                     <!-- BOTONES PARA VACIAR LISTADO Y COMPLETAR EL AJUSTE -->
-                    <div class="col-md-12 text-right">
+                    <div class="col-md-6 text-right">
                         <button class="btn btn-primary" id="btnAgregarProducto">
                             <i class="fas fa-shopping-cart"></i> Agregar Producto
                         </button>

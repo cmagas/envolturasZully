@@ -26,7 +26,7 @@
         <div class="row">
 
             <!-- Card Total Ventas MENSUAL -->
-            <div class="col-12 col-sm-6 col-md-4">
+            <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box">
                     <span class="info-box-icon bg-info elevation-1"><i class="fas fa-archive"></i></span>
 
@@ -40,7 +40,7 @@
             </div>
 
             <!-- Card Total Ventas DEL DIA-->
-            <div class="col-12 col-sm-6 col-md-4">
+            <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
                     <span class="info-box-icon bg-success elevation-1"><i class="fas fa-cart-plus"></i></span>
 
@@ -54,13 +54,27 @@
             </div>
 
             <!-- Adeudo personal -->
-            <div class="col-12 col-sm-6 col-md-4">
+            <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
                     <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Total Adeudo</span>
+                        <span class="info-box-text">Total Adeudo Personal</span>
                         <span class="info-box-number" id="totalAdeudo">$ 0.00</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+
+            <!-- Adeudo personal -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-briefcase"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Total Gastos Mes</span>
+                        <span class="info-box-number" id="totalGastos">$ 0.00</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>

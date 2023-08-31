@@ -230,9 +230,9 @@ function modificar_producto()
 {
     var idProducto = $("#txtIdProducto").val();
     var nombreProducto = $("#txt_nombre_modificar").val();
-    var codigoProducto = $("#txt_codigoBarra_modificar").val();
+    //var codigoProducto = $("#txt_codigoBarra_modificar").val();
     var impuesto = $("#txt_impuesto_modificar").val();
-    //var categoria = $("#txt_categoria_modificar").val();
+    var categoria = $("#txt_categoria_modificar").val();
     var idTipo = $("#cmb_tipo_modificar").val();
     var idSubTipo = $("#cmb_subTipo_modificar").val();
     var precioCompra = $("#txt_precioCompra_modificar").val();
@@ -254,7 +254,7 @@ function modificar_producto()
         return Swal.fire("Mensaje De Advertencia","Los campos marcados con * son obligatorios","warning");
     }
 
-    var cadObj='{"idProducto":"'+idProducto+'","nombreProducto":"'+nombreProducto+'","codigoProducto":"'+codigoProducto+'","impuesto":"'+impuesto
+    var cadObj='{"idProducto":"'+idProducto+'","nombreProducto":"'+nombreProducto+'","impuesto":"'+impuesto+'","categoria":"'+categoria
         +'","idTipo":"'+idTipo+'","idSubTipo":"'+idSubTipo+'","precioCompra":"'+precioCompra+'","precioMayoreo":"'+precioMayoreo
         +'","precioMenudeo":"'+precioMenudeo+'","utilidad":"'+utilidad+'","stockMaximo":"'+stockMaximo+'","stockMinimo":"'+stockMinimo
         +'","precioProduccion":"'+precioProduccion+'","situacion":"'+situacion+'"}';

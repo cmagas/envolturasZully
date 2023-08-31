@@ -18,6 +18,8 @@ function obtenerDatosTarjetas()
             $("#totalVentasDia").html(respuesta['totalVentaDia']);
 
             $("#totalAdeudo").html(respuesta['totalAdeudos']);
+
+            $("#totalGastos").html(respuesta['importeTotalGastoMes']);
         }
 
 
