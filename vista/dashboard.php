@@ -81,6 +81,20 @@
                 <!-- /.info-box -->
             </div>
 
+            <!-- Total en Caja -->
+            <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box mb-3">
+                    <span class="info-box-icon bg-navy elevation-1"><i class="fas fa-briefcase"></i></span>
+
+                    <div class="info-box-content">
+                        <span class="info-box-text">Total en Caja</span>
+                        <span class="info-box-number" id="totalCaja">$ 0.00</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+
         </div>
 
         <div class="row mt-5">
@@ -118,9 +132,11 @@
 $(document).ready(function() {
     obtenerDatosTarjetas();
     listarPedidosVentas();
+    /*
     setInterval(() => {
        obtenerDatosTarjetas();
 
     }, 10000);
+    */
 });
 </script>

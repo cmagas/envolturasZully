@@ -224,6 +224,22 @@ function obtenerNombreGasto($id)
     return $valor;
 }
 
+function obtenerNombreCliente($id)
+{
+    global $con;
+    $valor="";
+
+    $consulta="SELECT nombre FROM 4018_clientes WHERE idCliente='".$id."'";
+    $res=$con->obtenerValor($consulta);
+
+    if($res)
+    {
+        $valor=strtoupper($res);
+    }
+
+    return $valor;
+}
+
 
 
 ?>

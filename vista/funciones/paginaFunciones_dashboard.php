@@ -1,5 +1,6 @@
 <?php
     session_start();
+    date_default_timezone_set('America/Mexico_City');
     include_once("conexionBD.php");
     include_once("utiles.php");
 
@@ -89,8 +90,9 @@
 
          $importeTotalGastoMes=cambiarFormatoMoneda($resPersonal+$resTotalGastos);
 
+         $saldoCaja= obtenerImporteCaja();
 
-         $o='{"totalVentaMes":"'.$totalVentaMes.'","totalVentaDia":"'.$totalVentaDia.'","totalAdeudos":"'.$totalAdeudos.'","importeTotalGastoMes":"'. $importeTotalGastoMes.'"}';
+         $o='{"totalVentaMes":"'.$totalVentaMes.'","totalVentaDia":"'.$totalVentaDia.'","totalAdeudos":"'.$totalAdeudos.'","importeTotalGastoMes":"'. $importeTotalGastoMes.'","saldoCaja":"'.$saldoCaja.'"}';
 
          echo $o;
 
@@ -126,6 +128,52 @@
         }
 
 		echo '{"data":['.$arrRegistro.']}';
+    }
+
+    function obtenerImporteCaja()
+    {
+        global $con;
+
+        $idUsuarioSesion=$_SESSION['idUsr'];
+        $cod_unidad=$_SESSION['cod_unidad'];
+
+        $fechaActual=date("Y-m-d");
+
+        $totalVentas=0;
+        $totalPagoPersonal=0;
+        $totalGastos = 0;
+        $saldo=0;
+
+         /*SE OBTIENE TOTAL VENTAS*/
+        $consultaVentas="SELECT SUM(total_venta) FROM 4004_venta_cabecera WHERE cod_unidad='".$cod_unidad."'";
+        $resVentas=$con->obtenerValor($consultaVentas); 
+        
+        if($resVentas)
+        {
+            $totalVentas=$resVentas;
+        }
+
+        /*SE OBTIENE EL TOTAL PAGO PERSONAL*/
+        $consultaPagosPersonal="SELECT SUM(importe) FROM 4017_abonosPedidosPersonal WHERE cod_unidad='".$cod_unidad."'";
+        $resPagoPersonal=$con->obtenerValor($consultaPagosPersonal);
+
+        if($resPagoPersonal)
+        {
+            $totalPagoPersonal=$resPagoPersonal;
+        }
+
+        /*SE OBTIENE EL TOTAL GASTOS*/
+        $consultarGastos="SELECT SUM(importe) FROM 4022_control_Gastos WHERE cod_unidad='".$cod_unidad."'";
+        $resTotalG=$con->obtenerValor($consultarGastos);
+
+        if($resTotalG)
+        {
+            $totalGastos=$resTotalG;
+        }
+
+        $saldo = cambiarFormatoMoneda($totalVentas-$totalPagoPersonal-$totalGastos);
+
+        return $saldo;
     }
 
 ?>    

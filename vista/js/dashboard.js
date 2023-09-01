@@ -20,6 +20,8 @@ function obtenerDatosTarjetas()
             $("#totalAdeudo").html(respuesta['totalAdeudos']);
 
             $("#totalGastos").html(respuesta['importeTotalGastoMes']);
+
+            $("#totalCaja").html(respuesta['saldoCaja']);
         }
 
 

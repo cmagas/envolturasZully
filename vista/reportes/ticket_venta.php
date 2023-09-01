@@ -19,12 +19,16 @@
 
     $nombreEmpresa="Nombre de la empresa";
 
+    
+
     if(isset($_POST['folio']))
 	{
 		$folio=$_POST['folio'];
     }else{
         $folio=$_GET['folio'];
     }
+
+    //$folio='00000005';
 
     $consultarDatosEmpresa="SELECT * FROM 4000_config_empresa WHERE cod_unidad='".$cod_unidad."'";
     $res=$con->obtenerPrimeraFila($consultarDatosEmpresa);
@@ -45,6 +49,9 @@
     $totalIVAV=$resVenta[7];
     $totalV=$resVenta[8];
     $idFormaPago=$resVenta[9];
+    $idCliente = $resVenta[13];
+
+    $nombreCliente=obtenerNombreCliente($idCliente);
 
     $numeroLetra=convertirNumeroLetra($totalV,$formatoMoneda=true,$mostrarDecimales=true);
 
@@ -131,17 +138,23 @@
                             font-size: 8pt;
                         }
 
+                        .datosCliente{
+                            text-align:left;
+                            font-size: 7pt;
+                        }
+
+
                     </style>
                 </head>
                 <body>
-                    <table width="90%" border="0" align="center">
+                    <table width="90%" border="0" align="center" border="0">
                         <tr>
                             <td width="20%" align="center">&nbsp;</td>
                             <td width="80%" align="center" colspan="4" class="tituloEmpresa p-0"><span>'.$nombreEmpresa.'</span> <br> '.$rfc.'</td>
                         </tr>
                         <tr>
                             <td width="20%" align="center">&nbsp;</td>
-                            <td td width="80%" align="center" colspan="4"></td>
+                            <td td width="80%" colspan="4" class="datosCliente">Cliente: '.$nombreCliente.'</td>
                         </tr>
                         <tr>
                             <td>&nbsp;</td>
